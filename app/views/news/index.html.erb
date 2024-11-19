@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+<% content_for :title, "Posts" %>
+
+
+<div class="d-flex justify-content-between">
+  <h1 class="my-5 text-center">Noticias</h1>
+  <div>
+    <%= link_to "Noticias", new_news_path, class:"btn btn-dark my-5" %>
+  </div>
+</div>
+
+
+<div class="row justify-content-between">
+  <% @news.each do |new| %>
+    <div class="card col-5 mb-5">
+    <div class="text-center">
+    <% begin %>
+      <div class="text-center"><%= image_tag new.image, class:"card-img-top"  %></div>
+      <% rescue Sprockets::Rails::Helper::AssetNotFound %>
+     <p class="my-5">No image found</p>
+     <% end %>
+  </div>
+      <div class="card-body">
+      <h5 class="card-title"><%= new.title %></h5>
+      <p class="card-text"><%= new.description.truncate(50) %></p>
+        <%= link_to "Ver", news_path(new), class:"btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+

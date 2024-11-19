@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="my-5 text-center"><%= @news.title %></h1>
+<div class="text-center mb-5">
+  <% begin %>
+    <%= image_tag @news.image, class:"card-img-top"%>
+  <% rescue Sprockets::Rails::Helper::AssetNotFound %>
+    <p class="my-5">No image found</p>
+  <% end %>
+  </div>
+
+  <div>
+  <%= @news.description%>
+  </div>
+
+<h3 class="mb-5 my-5">Comentario</h3>
+<% @comments.each do |comment| %>
+   <div>
+    <p>Autor: <%= comment.user.email %></p>
+    <p>Comentario: <%= comment.content %></P>
+  </div>
+  <% if user_signed_in? %>
+ <%= link_to "Nuevo Comentario", new_comment_path, class:"btn btn-dark" %>
+<% end %>
+<% end %>
+
+<div class="d-flex gap-2 my-5">
+  <%= link_to "Volver a noticias", news_index_path, class:"btn btn-dark" %>
+  <% if user_signed_in? %>
+  <% if current_user.id == @news.user_id %>
+  <%= link_to "Editar esta noticia", edit_news_path(@news), class:"btn btn-dark" %> |
+ <% end %>
+<% end %>
+</div>
+<div>
+   <% if user_signed_in? %>
+    <% if current_user.id == @news.user_id %>
+       <%= button_to "Eliminar", @news , class:"btn btn-danger btn-sm", method: :delete %>
+    <% end %>
+   <% end %>
+</div>

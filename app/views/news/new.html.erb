@@ -1,0 +1,11 @@
+<% content_for :title, "Noticias" %>
+
+<h1 class="my-5">Noticias</h1>
+
+<%= render "form", news: @news %>
+
+<br>
+
+<div>
+  <%= link_to "Volver a noticias", news_index_path, class:"btn btn-dark" %>
+</div>

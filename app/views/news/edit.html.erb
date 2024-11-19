@@ -1,0 +1,12 @@
+<% content_for :title, "Editing news" %>
+
+<h1>Editing news</h1>
+
+<%= render "form", news: @news %>
+
+<br>
+
+<div>
+  <%= link_to "Mostrar esta noticia", @news %> |
+  <%= link_to "Volver a noticias", news_index_path %>
+</div>
